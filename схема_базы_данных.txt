@@ -1,0 +1,50 @@
+1. таблица с вариантами ответов
+-- auto-generated definition
+create table answer_options
+(
+    id            int auto_increment
+        primary key,
+    question_id   int          null,
+    text          varchar(255) not null,
+    next_question varchar(1)   null,
+    constraint answer_options___question
+        foreign key (question_id) references question (id)
+);
+
+2. таблица с ответами пользователей
+-- auto-generated definition
+create table answer_users
+(
+    id                int auto_increment
+        primary key,
+    answer_options_id int null,
+    question_id       int null,
+    user_id           int null,
+    constraint answer_users___answer_optopns_id
+        foreign key (answer_options_id) references answer_options (id),
+    constraint answer_users___question_id
+        foreign key (question_id) references question (id),
+    constraint answer_users___user_id
+        foreign key (user_id) references user (id)
+);
+
+3. таблица с вопросами
+-- auto-generated definition
+create table question
+(
+    id       int auto_increment
+        primary key,
+    name     varchar(255) not null,
+    sort     int          null,
+    multiple varchar(1)   null
+);
+
+4. таблица с пользователями
+-- auto-generated definition
+create table user
+(
+    id      int auto_increment
+        primary key,
+    name    varchar(255) not null,
+    ip_user varchar(14)  null
+);
